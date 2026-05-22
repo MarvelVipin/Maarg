@@ -7,14 +7,16 @@ let io;
 function initiateSocket(server) {
     io = socketIo(server, {
         cors: {
-            origin: "https://gilded-mochi-8570d8.netlify.app",
+            origin: [
+                "https://maarg-frontend.onrender.com", // Your new Render Frontend
+                "http://localhost:5173"                // Your local Vite Frontend
+            ],
             methods: ["GET", "POST"],
             credentials: true
         },
         transports: ['polling', 'websocket'], 
         allowEIO3: true 
     });
-
     io.on("connection", (socket) => {
         console.log(`New client connected: ${socket.id}`);
 
