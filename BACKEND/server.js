@@ -1,6 +1,13 @@
 const http = require("http");
 const app = require("./app");
 const { initiateSocket } = require("./socket");
+const cors = require("cors");
+
+
+app.use(cors({
+  origin: "https://maarg-backend.onrender.com",
+  credentials: true
+}));
 
 const port = process.env.PORT || 3000;
 

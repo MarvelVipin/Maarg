@@ -11,7 +11,8 @@ function initiateSocket(server) {
             origin: (origin, callback) => {
                 const allowedOrigins = [
                     "https://maarg-frontend.onrender.com",
-                    "http://localhost:5173"
+                    "http://localhost:5173",
+                    "https://maarg-pa2r.onrender.com"
                 ];
                 if (!origin || allowedOrigins.indexOf(origin) !== -1) {
                     callback(null, true);
