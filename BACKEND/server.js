@@ -5,7 +5,7 @@ const cors = require("cors");
 
 
 app.use(cors({
-  origin: "https://maarg-backend.onrender.com",
+  origin: "https://maarg-pa2r.onrender.com",
   credentials: true
 }));
 
