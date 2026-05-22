@@ -10,7 +10,7 @@ const SocketProvider = ({ children }) => {
   useEffect(() => {
 
     const newSocket = io(import.meta.env.VITE_BASE_URL, {
-      transports: ['websocket'], 
+      transports: ['polling', 'websocket'], 
       withCredentials: true,
       autoConnect: true,
       auth: {

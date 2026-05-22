@@ -8,8 +8,8 @@ function initiateSocket(server) {
     io = socketIo(server, {
         cors: {
             origin: [
-                "https://maarg-frontend.onrender.com", // Your new Render Frontend
-                "http://localhost:5173"                // Your local Vite Frontend
+                "https://maarg-frontend.onrender.com", 
+                "http://localhost:5173"                
             ],
             methods: ["GET", "POST"],
             credentials: true
