@@ -7,18 +7,31 @@ let io;
 function initiateSocket(server) {
     io = socketIo(server, {
         cors: {
-            origin: "https://maarg-frontend.onrender.com",
+            // 👇 Dynamically allow whatever origin is requesting, or fallback
+            origin: (origin, callback) => {
+                const allowedOrigins = [
+                    "https://maarg-frontend.onrender.com",
+                    "http://localhost:5173"
+                ];
+                if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+                    callback(null, true);
+                } else {
+                    callback(new Error("Not allowed by CORS"));
+                }
+            },
             methods: ["GET", "POST"],
             credentials: true
         },
         transports: ['polling', 'websocket'],
         allowEIO3: true,
         handlePreflightRequest: (req, res) => {
+            const clientOrigin = req.headers.origin || "https://maarg-frontend.onrender.com";
+            
             res.writeHead(200, {
-                "Access-Control-Allow-Origin": "https://maarg-frontend.onrender.com",
-                "Access-Control-Allow-Methods": "GET,POST",
-                "Access-Control-Allow-Headers": "my-custom-header",
-                "Allow": "GET,POST",
+                "Access-Control-Allow-Origin": clientOrigin,
+                "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type, Authorization, my-custom-header",
+                "Allow": "GET,POST,OPTIONS",
                 "Access-Control-Allow-Credentials": "true"
             });
             res.end();
