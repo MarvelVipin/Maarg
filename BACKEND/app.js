@@ -18,7 +18,8 @@ ConnectToDb();
 app.use(cors({
     origin: [
         'https://maarg-frontend.onrender.com', 
-        'http://localhost:5173'                
+        'http://localhost:5173',
+        'https://maarg-pa2r.onrender.com'
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true 
