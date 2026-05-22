@@ -7,15 +7,22 @@ let io;
 function initiateSocket(server) {
     io = socketIo(server, {
         cors: {
-            origin: [
-                "https://maarg-frontend.onrender.com", 
-                "http://localhost:5173"                
-            ],
+            origin: "https://maarg-frontend.onrender.com",
             methods: ["GET", "POST"],
             credentials: true
         },
-        transports: ['polling', 'websocket'], 
-        allowEIO3: true 
+        transports: ['polling', 'websocket'],
+        allowEIO3: true,
+        handlePreflightRequest: (req, res) => {
+            res.writeHead(200, {
+                "Access-Control-Allow-Origin": "https://maarg-frontend.onrender.com",
+                "Access-Control-Allow-Methods": "GET,POST",
+                "Access-Control-Allow-Headers": "my-custom-header",
+                "Allow": "GET,POST",
+                "Access-Control-Allow-Credentials": "true"
+            });
+            res.end();
+        }
     });
     io.on("connection", (socket) => {
         console.log(`New client connected: ${socket.id}`);
